@@ -100,3 +100,5 @@ The included `sample-app/` is a **DevOps fallback/mock** that follows the shared
 ## additional notes
 
 If ports 8080 or 3000 are already in use, change BACKEND_HOST_PORT or FRONTEND_HOST_PORT in .env. Do not stop unrelated applications unless you know they are safe to stop.
+
+menjalankan CI test: bash .scripts/frontend-ci.sh

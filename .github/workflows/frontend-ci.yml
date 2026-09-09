@@ -1,6 +1,6 @@
 name: Frontend CI Demo
 
-on:
+on: #trigger ketika worflow  di dispatch atau di push
   workflow_dispatch:
   push:
     paths:
@@ -8,15 +8,15 @@ on:
       - 'scripts/frontend-ci.sh'
       - '.github/workflows/frontend-ci.yml'
 
-jobs:
+jobs: #selesai di trigger maka job ini akan dijalankan
   frontend-ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7 #meng get sourcode yg sudah di push
       - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '20' #karna fe ini pake node, maka kita setup node versi 20
       - name: Frontend test/build
-        run: bash scripts/frontend-ci.sh
-      - name: Build container
+        run: bash scripts/frontend-ci.sh #verifikasi yg dilakukan CI
+      - name: Build container #settelah verifikasi lolos, akan dilakukan build container
         run: docker build -t jakone-frontend:${{ github.sha }} apps/frontend

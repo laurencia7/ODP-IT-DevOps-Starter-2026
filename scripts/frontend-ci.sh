@@ -4,7 +4,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 APP="$ROOT/apps/frontend"
 echo "[frontend-ci] app=$APP"
 
-if [[ -f "$APP/package.json" ]]; then
+if [[ -f "$APP/package.json" ]]; then #dilakukan pengecekan json nya
   cd "$APP"
   if [[ -f package-lock.json ]]; then npm ci; else npm install; fi
   npm test --if-present
@@ -13,7 +13,7 @@ if [[ -f "$APP/package.json" ]]; then
 elif [[ -f "$APP/tests/contract.test.mjs" ]]; then
   node --test "$APP/tests/contract.test.mjs"
   node --check "$APP/src/app.js"
-elif [[ -f "$APP/Dockerfile" ]]; then
+elif [[ -f "$APP/Dockerfile" ]]; then #dockerfile = file yg dibutuhkan untuk membangun image docker
   echo "No source-level CI command detected; Docker image will be validated by the workflow/container build step."
 else
   echo "No supported frontend build detected. Expected package.json, fallback tests, or Dockerfile." >&2
